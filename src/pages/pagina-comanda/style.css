@@ -1,0 +1,90 @@
+
+.comanda_principal{
+
+        display: grid;
+        grid-template-columns: 1fr 1fr ;
+        grid-template-rows: 5fr ;
+        justify-items: center;
+        
+    
+}
+.b{
+    background-color: aquamarine;
+}
+
+.div_a{
+    background-color: blueviolet;
+    width: 25rem;
+    height: 30rem;
+}
+    .div_a_a{
+        background-color: rgb(236, 224, 46);
+        width: 10rem;
+        height: 15rem;
+    }
+        
+        .lista_producos_comanda{
+            display: flex;
+        }
+
+    .div_a_b{
+        background-color: rgb(226, 86, 43);
+        width: 10rem;
+        height: 10rem;
+    }
+
+        .div_a_b_a{
+            background-color: rgb(136, 108, 235);
+            width: 10rem;
+            height: 5rem;
+        }
+
+        .div_a_b_b{
+            background-color: rgb(121, 81, 69);
+            width: 10rem;
+            height: 5rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr ;
+            grid-template-rows: 1fr 1fr ;
+        }
+
+            .div_botones_funciones{
+                display: grid;
+                grid-template-columns: 1fr 1fr ;
+                grid-template-rows: 1fr 1fr ;
+                gap: 0.1rem;      
+            }
+
+
+
+.div_b{
+    display: flex;
+    background-color: rgb(104, 226, 43);
+    width: 25rem;
+    height: 30rem;
+}
+    .div_b_a{
+        background-color: rgb(202, 194, 82);
+        width: 25rem;
+        height: 10rem;
+        display: flex;
+        flex-direction: column;
+    }
+
+        .categoria--hidden{
+            display: none;        
+        }
+
+    .div_b_b{
+        background-color: rgb(221, 139, 114);
+        width: 15rem;
+        height: 10rem;
+        justify-content: right;
+      
+
+        
+    }
+
+
+
+        

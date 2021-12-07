@@ -1,0 +1,22 @@
+
+
+.login_page{
+    position: absolute;
+    background-color: antiquewhite;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+
+.iniciar_sesion{
+  display: flex;
+  justify-content: center;
+
+  width: 72%;
+}  
+  
