@@ -1,4 +1,4 @@
-import * as React from 'react';
+
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -12,13 +12,21 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 
-import {Link} from 'react-router-dom';
-
 import Stack from '@mui/material/Stack';
 
 
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useParams,
+  useRouteMatch
+} from "react-router-dom";
 
-const pages = ['Sala', 'Terraza', 'Barra'];
+
+const pages = ['S', 'T', 'B'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 export default function PaginaComandaHeader(){
@@ -47,12 +55,14 @@ export default function PaginaComandaHeader(){
       setAnchorElUser(null);
     };
   
-
+    let { id } = useParams();
 
     return(
         <header className="header_container">
- 
+            
                 <AppBar position="static">
+                    <div>{id}</div>
+                    {/* <div>hola</div> */}
                     <Container maxWidth="xm">
                             <Toolbar disableGutters>
 
@@ -77,11 +87,13 @@ export default function PaginaComandaHeader(){
                                         sx={{ display: { xm: 'block', md: 'none' }, }} >
 
                                                 <Stack spacing={3} direction="column">
+                                                    
                                                     <Link to="/mesas_sala">
                                                         <Button onClick={handleCloseNavMenu} variant="contained">
-                                                            {pages[0]} 
+                                                            {pages[1]} 
                                                         </Button>
                                                     </Link>
+                                                    
                                                 {/* </Stack>
 
                                                 <Stack spacing={2} direction="row"> */}
@@ -109,7 +121,7 @@ export default function PaginaComandaHeader(){
                                 {/* <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}> */}
 
                                 <Box sx={{ flexGrow: 1, display: { xs: 'none', sm: 'flex', md: 'flex'  } }}>
-
+                                
                                         <Stack spacing={3} direction="row">
                                             <Link to="/mesas_sala">
                                                 <Button variant="contained">Sala</Button>

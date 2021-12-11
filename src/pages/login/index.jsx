@@ -6,29 +6,70 @@ import Box from '@mui/material/Box';
 
 import { useHistory } from "react-router-dom";
 
-import { styled } from '@mui/material/styles';
+import Typography from '@mui/material/Typography';
 
 
-const Div = styled('div')(({ theme }) => ({
-    ...theme.typography.button,
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(2),
-    width: theme.spacing(24),
-  }));
+
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { red } from '@mui/material/colors';
+import { useState } from 'react';
+
+import Switch from '@mui/material/Switch';
+
+
+
+
+import Button from '@mui/material/Button';
+
+const myTheme = createTheme({
+    palette:{ 
+  
+      primary:{
+        main: '#06659c',//azul
+        dark:'#0b3852'//azul oscuro
+      },
+  
+      secondary:{
+        // main: red[800],
+        main: '#f0f06e',// amarillo claro
+      },
+  
+
+  
+  
+    }  
+  });
+  
+  
+  const myDarkTheme = createTheme({
+    palette:{
+    //  mode:'dark',
+      primary:{
+        main: '#c23667',//rojo 
+        dark:'#630023'// rojo oscuro
+      },
+  
+  
+      secondary:{
+        // main: red[800],
+        main: '#c7c70a',//amarillo oscuro
+      },
+  
+  
+  
+    }
+  });
+  
 
 export default function Login(){
+
+
+    const [isDark, updateTheme] = useState(false); 
 
     let history = useHistory();
 
     const handleSubmit = e => {
         e.preventDefault();
-
-    //   e.preventDefault();
-    //   if ( e.target.name.value === 'nil' ){
-    //     history.push("/principal");
-    //   }else{
-    //       console.log('usuario incorrecto');
-    //   }
 
             if(e.target.checkValidity()){ 
                 console.log('paso 3');
@@ -48,7 +89,8 @@ export default function Login(){
                 .then(d => {
                     if( d.respuesta === 'ok'){
                         console.log('usuario correco')
-                        history.push("/principal");
+                        history.push("/pagina_mesas");
+                        console.log('despues del history');
                     }else{
                         console.log('usuario incorrecto')
                     }
@@ -60,45 +102,61 @@ export default function Login(){
     }
 
     return(
-        <div className="login_page"> 
+ 
+    <ThemeProvider theme={isDark ? myDarkTheme : myTheme}>   
+
+        <div className="login_page" style={ isDark ? {backgroundColor: myDarkTheme.palette.secondary.main } : {backgroundColor: myTheme.palette.secondary.main}  }> 
+        <div className="switch">
+        <Switch
+            color="primary"
+            checked={isDark}
+            onChange={() => updateTheme(!isDark)}
+            inputProps={{ 'aria-label': 'controlled' }}
+            />
+        </div>
 
 
             
             <div>
-                <Box sx={{display: '-ms-flexbox', alignItems: 'center', '& > :not(style)': { m: 5 },}} > 
+                      
+                <Box color="primary" sx={{display: '-ms-flexbox', alignItems: 'center', '& > :not(style)': { m: 5 },}} > 
                 
-                <div>
-                    <Div align="center" >{"Login"}</Div>
-                </div>
-                    
                     <form onSubmit={handleSubmit}>
+                        <div className="login_container">
 
-                        <TextField
-                            required    
-                            helperText="Please enter your name"
-                            id="demo-helper-text-aligned-name"
-                            label="Name"
-                            type="text"
-                            name="name"
-                        />
+                                <Typography color="primary" align='center' variant="h5" component="div" gutterBottom>
+                                            Login
+                                </Typography>
 
-                        <TextField
-                            required
-                            helperText="Please enter your name"
-                            id="demo-helper-text-aligned-password"
-                            label="Password"
-                            type="password"
-                            name="password"
-                        />
+                                <TextField
+                                    color="primary"
+                                    required    
+                                    helperText="Please enter your name"
+                                    id="demo-helper-text-aligned-name"
+                                    label="Name"
+                                    type="text"
+                                    name="name"
+                                />
 
-                        <div className="iniciar_sesion">
-                            <button type="submit">Iniciar Sesión</button>
+                                <TextField
+                                    color="primary"
+                                    required
+                                    helperText="Please enter your name"
+                                    id="demo-helper-text-aligned-password"
+                                    label="Password"
+                                    type="password"
+                                    name="password"
+                                />
+
+                              
+                                
+                                <Button  type="submit"  color="primary" variant="contained" disableElevation>
+                                Iniciar Sesion
+                                </Button>
                         </div>
 
 
                     </form>
-
-
 
                 </Box>
             </div>
@@ -108,5 +166,9 @@ export default function Login(){
             
 
         </div>
+
+
+    </ThemeProvider>   
+
     )
 }

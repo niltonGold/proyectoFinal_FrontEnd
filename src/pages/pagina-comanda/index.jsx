@@ -1,74 +1,19 @@
 import * as React from 'react';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import ListSubheader from '@mui/material/ListSubheader';
-
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import CalculateIcon from '@mui/icons-material/Calculate';
-import EuroIcon from '@mui/icons-material/Euro';
 
 
-// import * as React from 'react';
-// import { DataGrid } from '@mui/x-data-grid';
-// import { useDemoData } from '@mui/x-data-grid-generator';
-
-// import * as React from 'react';
-import Stack from '@mui/material/Stack';
-import ButtonUnstyled, { buttonUnstyledClasses } from '@mui/base/ButtonUnstyled';
-import { styled } from '@mui/system';
 
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Box from '@mui/material/Box';
 
 
-// import Box from '@mui/material/Box';
-// import Button from '@mui/material/Button';
-
 import './style.css';
 import PaginaComandaHeader from '../../components/pagina-comanda(componentes)/pagina-comanda-header';
+import Div_a_a from '../../components/pagina-comanda(componentes)/div_a/div_a_a';
+import Div_a_b from '../../components/pagina-comanda(componentes)/div_a/div_a_b';
 
 
-
-const CustomButtonRoot = styled('button')`
-  background-color: #007fff;
-  padding: 15px 20px;
-  border-radius: 10px;
-  color: #fff;
-  font-weight: 600;
-  font-family: Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  transition: all 200ms ease;
-  cursor: pointer;
-  box-shadow: 0 4px 20px 0 rgba(61, 71, 82, 0.1), 0 0 0 0 rgba(0, 127, 255, 0);
-  border: none;
-
-  &:hover {
-    background-color: #0059b2;
-  }
-
-  &.${buttonUnstyledClasses.active} {
-    background-color: #004386;
-  }
-
-  &.${buttonUnstyledClasses.focusVisible} {
-    box-shadow: 0 4px 20px 0 rgba(61, 71, 82, 0.1), 0 0 0 5px rgba(0, 127, 255, 0.5);
-    outline: none;
-  }
-
-  &.${buttonUnstyledClasses.disabled} {
-    opacity: 0.5;
-    cursor: not-allowed;
-    box-shadow: 0 0 0 0 rgba(0, 127, 255, 0);
-  }
-`;
-
-function CustomButton(props) {
-  return <ButtonUnstyled {...props} component={CustomButtonRoot} />;
-}
-
-
+let listaPedido = [];
 
 
 export default function PaginaComanda(){
@@ -158,113 +103,45 @@ export default function PaginaComanda(){
     const [ categoriaPostres, setCategoriaProstres ]  = React.useState(true);
 
 
-    const [ notaComanda ]  = React.useState([]);
+    const [ notaComanda, setNotaComanda ]  = React.useState([]);
 
 
+
+
+    function addListComanda(h){
+
+        notaComanda.push(h);
+        console.log(listaPedido)
+        setNotaComanda([...notaComanda])
+        
+    }  
+   
+// React.useEffect( () => {
+//     updateComanda(listaPedido);
+// }, [listaPedido]);
 
 
     return(
         
         <div>
             <PaginaComandaHeader></PaginaComandaHeader>
-            
             <div className="comanda_principal">
                 <div className="div_a">
-                    1
-                    <div className="div_a_a">
-                        1.1
-                            <List
-                                sx={{ width: '250px', maxWidth: 360, bgcolor: 'background.paper', position: 'relative', overflow: 'auto', maxHeight: 200, '& ul': { padding: 0 },}}
-                                subheader={<li />} >
-
-                               
-                                <div className="lista_producos_comanda">
-                                    <div>
-                                        <dl>
-                                            <dt>prod</dt>
-                                                <dd>ggg</dd>
-                                                <dd>hamburguesa</dd>
-                                                <dd>pollo</dd>
-                                                <dd>hamburguesa</dd>
-                                                <dd>pollo</dd>
-                                                <dd>hamburguesa</dd>
-                                                <dd>pollo</dd>
-                                                <dd>hamburguesa</dd>
-                                                <dd>pollo</dd>
-                                                <dd>hamburguesa</dd>
-                                                <dd>pollo</dd>
-                                                <dd>hamburguesa</dd>
-                                        </dl>
-                                    </div>
-
-                                    <div>
-                                        <dl>
-                                            <dt>imp</dt>
-                                                <dd>12</dd>
-                                                <dd>15</dd>
-                                                <dd>12</dd>
-                                                <dd>15</dd>
-                                                <dd>12</dd>
-                                                <dd>15</dd>
-                                                <dd>12</dd>
-                                                <dd>15</dd>
-                                                <dd>12</dd>
-                                                <dd>15</dd>
-                                                <dd>12</dd>
-                                                <dd>15</dd>
-                                        </dl>
-                                    </div>
-
-                                </div>    
-                                
-                                
-
-                            </List>
-
-
-
-
-
-
-                    </div>
-
-                    <div className="div_a_b">
-                        1.2
-                        <div className="div_a_b_a">
-                            ToTal : 7,90 €                            
-                        </div>
-
-                        <div className="div_a_b_b">
-                            
-                                
-                                <Stack spacing={3} direction="row" >
-                                    <div className="div_botones_funciones">
-                                    <CustomButton size='small' >INV</CustomButton>
-                                    <CustomButton size='small' > <DeleteForeverIcon></DeleteForeverIcon> </CustomButton>
-                                    <CustomButton size='small' > <CalculateIcon ></CalculateIcon> </CustomButton>
-                                    <CustomButton size='small' > <EuroIcon></EuroIcon> </CustomButton>
-                                    </div>
-                                </Stack> 
-                            
-
-                            {/* <div> <button  >2</button> </div>
-                            <div> <button>3</button> </div>
-                            <div> <button>4</button> </div> */}
-                                                        
-                        </div>
-                    </div>
+                    {console.log(notaComanda)}
+                    {notaComanda.map( (e,i) => <div key={i}>{e}</div> )}
+                    <Div_a_a></Div_a_a>
+                
+                    <Div_a_b></Div_a_b>
                     
                 </div>
 
 
                 <div className="div_b">
                     2
-
-                        {/* <Box className="div_b_a" sx={{ '& button': { m: 1 } }}> */}
                         <Box className="div_b_a" sx={{ '& button': { m: 1 } }}>
                             <div className={categoriaBebidas ? 'categoria--hidden' : ''}>
                                 <div >
-                                    <Button onClick={()=> console.log('bebida') } variant="outlined" size="medium">
+                                    <Button onClick={ () => addListComanda('bebida1') } variant="outlined" size="medium">
                                         bebida1
 
                                     </Button>

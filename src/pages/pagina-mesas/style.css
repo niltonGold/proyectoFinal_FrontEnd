@@ -1,71 +1,21 @@
 
-.main_container{
-    background-color: rgb(206, 165, 111);
-    width: 100vh;
-    height: 50%;
-    display: flex;
-    flex-direction: column;
-    gap: 4rem;
-    
-}
-
-.mesas_fila{
-    display: flex;
-    gap: 4rem;
+/* .header_container{
     background-color: antiquewhite;
-    justify-content: center;
+    width: 100vh;
+    height: 20%;
 }
 
-.mesa:hover{
-    background: black;
-    color: white;
-    cursor: pointer;
-}
-
-
-.grip_container1 {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 5fr 6fr;
-    column-gap: 15px; /* Estoy separando mis elementos */
-    row-gap: 5px; /* separa las filas */
-    margin-right: 2rem;
-    margin-left: 2rem;
-    margin-top: 2rem;
-    justify-items: center;
-    
-}
-
-
-
-
-
-.mesa {
-    width: 4rem;
-    height: 4rem;
+.header_principal{
     display: flex;
-    flex-direction: column;
-  
-    /* margin-left: 1rem;
-    margin-right: 2rem; */
+    flex-direction: row;
+    gap: 2rem;
+} */
 
-    margin-bottom: 1rem; 
-    /* background-color: aqua; */
-    display: flex;
-    justify-content: center;
-    justify-items: center;
-    align-items: center;
+
+.principal__header{
+    /* display:none; */
 }
 
-.a{
-    /* background-color: rgb(6, 65, 65); */
-    background-image: url("tabla.jpg");
-    
-    padding-top: 1px;
-    padding-left: 5px;
-    padding-right: 1px;
-
-    margin-top: 5px;
-
+.principal__header-hidden{
+    display:none;
 }
-    

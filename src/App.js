@@ -1,25 +1,64 @@
 
 import './App.css';
-import { Route, Switch, BrowserRouter } from 'react-router-dom';
-
 import Login from './pages/login';
-import PaginaMesas from './pages/pagina-mesas';
 import PaginaComanda from './pages/pagina-comanda';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useParams,
+  useRouteMatch
+} from "react-router-dom";
+
+import MesasTerraza from './components/pagina-mesas(componetes)/mesas--terraza';
+import MesasSala from './components/pagina-mesas(componetes)/mesas--sala';
+import MesasBarra from './components/pagina-mesas(componetes)/mesas--barra';
+import PaginaMesas from './pages/pagina-mesas';
 
 function App() {
+
   return (
-    <div>
-      <BrowserRouter>
+    
+    <Router>
 
           <Switch>
-            <Route exact path="/" component={Login}/>
-            <Route exact path="/principal" component={PaginaMesas}/>
-            <Route exact path="/pagina_comanda" component={PaginaComanda}/>
-         
+
+
+            <Route path="/pagina_mesas">
+
+                <PaginaMesas></PaginaMesas>
+              
+                <Route path="/pagina_mesas/mesas_sala">     
+                    <MesasSala></MesasSala>
+                </Route>
+
+                <Route path="/pagina_mesas/mesas_terraza">
+                    <MesasTerraza></MesasTerraza> 
+                </Route>
+
+            
+                <Route path="/pagina_mesas/mesas_barra">
+                    <MesasBarra></MesasBarra>
+                </Route>
+
+            </Route>
+
+            <Route path="/pagina_comanda/:id">     
+                    <PaginaComanda></PaginaComanda>
+            </Route>
+
+
+            <Route path="/">
+              <Login></Login>  
+            </Route> 
+
           </Switch>  
         
-      </BrowserRouter>
-    </div>  
+      </Router>
+      
+
+
   );
 }
 

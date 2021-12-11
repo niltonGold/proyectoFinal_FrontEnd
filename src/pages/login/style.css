@@ -2,7 +2,7 @@
 
 .login_page{
     position: absolute;
-    background-color: antiquewhite;
+    /* background-color: antiquewhite; */
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
@@ -12,11 +12,23 @@
     align-items: center;
   }
   
+    .switch{
+      justify-content: left;
+      width: 100%;
+    }
 
-.iniciar_sesion{
+
+
+.login_container{
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  justify-items: center;
+  gap: 1rem;
+}
 
-  width: 72%;
-}  
-  
+.login_title{
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+}
