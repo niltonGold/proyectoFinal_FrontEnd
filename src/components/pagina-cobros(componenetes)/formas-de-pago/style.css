@@ -1,0 +1,15 @@
+.pago_tarjeta{
+    display: flex;
+    flex-direction: row;
+    padding-top: 2rem;
+}
+
+.panel_numerico{
+    display: flex;
+    flex-direction: column;    
+}
+
+.pago_efectivo{
+    display: flex;
+    flex-direction: column;
+}

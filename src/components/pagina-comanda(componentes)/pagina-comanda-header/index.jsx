@@ -14,16 +14,15 @@ import MenuItem from '@mui/material/MenuItem';
 
 import Stack from '@mui/material/Stack';
 
+import TableBarOutlinedIcon from '@mui/icons-material/TableBarOutlined';//sala
+import LocalBarOutlinedIcon from '@mui/icons-material/LocalBarOutlined';//barra
+import TableRestaurantOutlinedIcon from '@mui/icons-material/TableRestaurantOutlined';//terraza
 
-import React from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useParams,
-  useRouteMatch
-} from "react-router-dom";
+
+import './style.css';
+
+import React, { useState } from "react";
+import {  Link, useParams } from "react-router-dom";
 
 
 const pages = ['S', 'T', 'B'];
@@ -55,14 +54,37 @@ export default function PaginaComandaHeader(){
       setAnchorElUser(null);
     };
   
+
+    const [mostrarMesasSala, setMostrarMesasSala] = useState('icono--hidden');
+    const [mostrarMesasBarra, setMostrarMesasBarra] = useState('icono--hidden');
+    const [mostrarMesasTerraza, setMostrarMesasTerraza] = useState('icono--hidden');
+
     let { id } = useParams();
+
+    function TipoMesa(id){
+        if( id.id.charAt(0) === 'S'){
+            setMostrarMesasSala('');
+        }
+        if( id.id.charAt(0) === 'B'){
+            setMostrarMesasBarra('');
+        }
+        if( id.id.charAt(0) === 'T'){
+            setMostrarMesasTerraza('');
+        }
+    }
+
+    React.useEffect( ()=>{
+        TipoMesa({id});
+    },[{id}] )
+    
+
 
     return(
         <header className="header_container">
             
                 <AppBar position="static">
-                    <div>{id}</div>
-                    {/* <div>hola</div> */}
+                   
+                    
                     <Container maxWidth="xm">
                             <Toolbar disableGutters>
 
@@ -120,33 +142,24 @@ export default function PaginaComandaHeader(){
 
                                 {/* <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}> */}
 
-                                <Box sx={{ flexGrow: 1, display: { xs: 'none', sm: 'flex', md: 'flex'  } }}>
                                 
-                                        <Stack spacing={3} direction="row">
-                                            <Link to="/mesas_sala">
-                                                <Button variant="contained">Sala</Button>
-                                            </Link>
-                                        {/* </Stack> */}
-
-                                        {/* <Stack spacing={2} direction="row"> */}
-                                            <Link to="/mesas_terraza">
-                                                <Button variant="contained">Terraza</Button>
-                                            </Link>
-                                        {/* </Stack> */}
- 
-                                        {/* <Stack spacing={2} direction="row"> */}
-                                            <Link to="/mesas_barra">
-                                                <Button variant="contained">Barra</Button>
-                                            </Link>
-                                        </Stack>
-
-                                </Box>
 
                                 <Box sx={{ flexGrow: 0 }}>
                                     <Tooltip title="Open settings">
-                                        <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                            <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                                                
+                                         <IconButton  onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                                            <Avatar  alt="Remy Sharp">
+                                                
+                                                <div className={mostrarMesasSala} ><TableBarOutlinedIcon/></div>
+                                                <div className={mostrarMesasBarra} ><LocalBarOutlinedIcon/></div>
+                                                <div className={mostrarMesasTerraza} ><TableRestaurantOutlinedIcon/></div>
+                                            </Avatar>   
+                                            <div>{id}</div>
                                         </IconButton>
+
+
+                                       
+
                                     </Tooltip>
                                     <Menu
                                     sx={{ mt: '45px' }}

@@ -1,0 +1,9 @@
+.categoria_elegida{
+    display: flex;
+    flex-direction: row;
+}
+
+.button_group{
+    display: flex;
+    gap: 0.5rem;
+}

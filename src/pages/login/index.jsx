@@ -30,8 +30,8 @@ const myTheme = createTheme({
       },
   
       secondary:{
-        // main: red[800],
-        main: '#f0f06e',// amarillo claro
+        main: red[800],
+        // main: '#f0f06e',// amarillo claro
       },
   
 

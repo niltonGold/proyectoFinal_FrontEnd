@@ -5,16 +5,14 @@ import PaginaComanda from './pages/pagina-comanda';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link,
-  useParams,
-  useRouteMatch
+  Route
 } from "react-router-dom";
 
 import MesasTerraza from './components/pagina-mesas(componetes)/mesas--terraza';
 import MesasSala from './components/pagina-mesas(componetes)/mesas--sala';
 import MesasBarra from './components/pagina-mesas(componetes)/mesas--barra';
 import PaginaMesas from './pages/pagina-mesas';
+import { PaginaCobro } from './pages/pagina-cobro';
 
 function App() {
 
@@ -48,6 +46,10 @@ function App() {
                     <PaginaComanda></PaginaComanda>
             </Route>
 
+
+            <Route path="/pagina_cobro/:cuentaTotal">     
+                    <PaginaCobro></PaginaCobro>
+            </Route>
 
             <Route path="/">
               <Login></Login>  

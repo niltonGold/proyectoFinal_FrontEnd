@@ -1,0 +1,7 @@
+
+.contenedor_pago_forma{
+    display: flex;
+    flex-direction: row;
+    background-color: blanchedalmond;
+    
+}
