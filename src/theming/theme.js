@@ -6,12 +6,13 @@ import { red } from '@mui/material/colors';
         palette:{ 
 
                     primary:{
-                        main: '#67b000'
+                        main: '#000000',
+                        dark:'#e91e63' 
                     },
 
                     secondary:{
-                        main: red[800],
-                        dark:'#e91e63'  
+                        main: red[100],
+                        dark:'#000000'  
                     },
 
         }  
@@ -20,9 +21,14 @@ import { red } from '@mui/material/colors';
 
 export const myDarkTheme = createTheme({
         palette:{
-                mode:'dark',
-                warning:{
-                    main: '#ff0000',
+
+
+                primary:{
+                    main: '#4B77D6'//azul
+                  },
+                  secondary:{
+                    main: red[500],
+                    dark:'#e91e63'  
                 },
 
         }

@@ -10,61 +10,26 @@ import Typography from '@mui/material/Typography';
 
 
 
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { createTheme } from '@mui/material/styles';
 import { red } from '@mui/material/colors';
 import { useState } from 'react';
 
 import Switch from '@mui/material/Switch';
+import ThemeProvider from '../../theming/theme-provider';
 
 
-
+import {useTranslation} from "react-i18next";
 
 import Button from '@mui/material/Button';
+import SwichtButton from '../../components/swich';
 
-const myTheme = createTheme({
-    palette:{ 
-  
-      primary:{
-        main: '#06659c',//azul
-        dark:'#0b3852'//azul oscuro
-      },
-  
-      secondary:{
-        main: red[800],
-        // main: '#f0f06e',// amarillo claro
-      },
-  
 
-  
-  
-    }  
-  });
-  
-  
-  const myDarkTheme = createTheme({
-    palette:{
-    //  mode:'dark',
-      primary:{
-        main: '#c23667',//rojo 
-        dark:'#630023'// rojo oscuro
-      },
-  
-  
-      secondary:{
-        // main: red[800],
-        main: '#c7c70a',//amarillo oscuro
-      },
-  
-  
-  
-    }
-  });
-  
 
 export default function Login(){
+    const [t, i18n] = useTranslation('common');
 
-
-    const [isDark, updateTheme] = useState(false); 
+    // const [isDark, updateTheme] = useState(false); 
+    const [ respuestaFromMongo, setRespuestaFromMongo] = useState('');
 
     let history = useHistory();
 
@@ -87,12 +52,18 @@ export default function Login(){
                 fetch('http://localhost:3001/auth/login', options)
                 .then(r => r.json() )
                 .then(d => {
-                    if( d.respuesta === 'ok'){
-                        console.log('usuario correco')
+                    let posicionDelPunto = d.respuesta.indexOf('.');
+                    let mensaje = d.respuesta.slice(0,posicionDelPunto)
+                    if( mensaje === 'SessionIniciada'){
+                        console.log('usuario correco');
+                        let token = d.respuesta.slice( (posicionDelPunto + 1), (d.respuesta.length - 1));
+                        console.log(token);
+                        sessionStorage.setItem('token', token);
                         history.push("/pagina_mesas");
-                        console.log('despues del history');
-                    }else{
-                        console.log('usuario incorrecto')
+                    }else if( mensaje === 'UsuarioEnSesion' ) {
+                        setRespuestaFromMongo('Sesion ya Iniciada');
+                    }else if( mensaje === 'UsuarioIncorrecto' ){
+                        setRespuestaFromMongo('Usuario incorrecto ');
                     }
                 } );
 
@@ -101,41 +72,37 @@ export default function Login(){
             }
     }
 
+
+    const handleIniciarSesion = () => {
+        setRespuestaFromMongo('');
+    }
+
+
+
+
+
     return(
- 
-    <ThemeProvider theme={isDark ? myDarkTheme : myTheme}>   
 
-        <div className="login_page" style={ isDark ? {backgroundColor: myDarkTheme.palette.secondary.main } : {backgroundColor: myTheme.palette.secondary.main}  }> 
-        <div className="switch">
-        <Switch
-            color="primary"
-            checked={isDark}
-            onChange={() => updateTheme(!isDark)}
-            inputProps={{ 'aria-label': 'controlled' }}
-            />
-        </div>
-
-
-            
-            <div>
-                      
+       <Box className="login_page"  sx={{ backgroundColor: 'secondary.main' }}  > 
+        
                 <Box color="primary" sx={{display: '-ms-flexbox', alignItems: 'center', '& > :not(style)': { m: 5 },}} > 
                 
                     <form onSubmit={handleSubmit}>
                         <div className="login_container">
 
                                 <Typography color="primary" align='center' variant="h5" component="div" gutterBottom>
-                                            Login
+                                    {t('login.title')}
                                 </Typography>
-
+                                <div className='usuario_incorrecto'>{respuestaFromMongo}</div>
                                 <TextField
                                     color="primary"
                                     required    
                                     helperText="Please enter your name"
                                     id="demo-helper-text-aligned-name"
                                     label="Name"
-                                    type="text"
+                                    type="email"
                                     name="name"
+                                    onClick={handleIniciarSesion}
                                 />
 
                                 <TextField
@@ -146,11 +113,12 @@ export default function Login(){
                                     label="Password"
                                     type="password"
                                     name="password"
+                                    onClick={handleIniciarSesion}
                                 />
 
                               
                                 
-                                <Button  type="submit"  color="primary" variant="contained" disableElevation>
+                                <Button onClick={handleIniciarSesion} type="submit"  color="primary" variant="contained" disableElevation>
                                 Iniciar Sesion
                                 </Button>
                         </div>
@@ -159,16 +127,13 @@ export default function Login(){
                     </form>
 
                 </Box>
-            </div>
+         
             
 
 
             
 
-        </div>
-
-
-    </ThemeProvider>   
+        </Box> 
 
     )
 }

@@ -60,6 +60,7 @@ export default function PaginaComandaHeader(){
     const [mostrarMesasTerraza, setMostrarMesasTerraza] = useState('icono--hidden');
 
     let { id } = useParams();
+    console.log(id);
 
     function TipoMesa(id){
         if( id.id.charAt(0) === 'S'){

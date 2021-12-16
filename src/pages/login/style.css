@@ -32,3 +32,8 @@
   justify-items: center;
   align-items: center;
 }
+
+.usuario_incorrecto{
+  display: flex;
+  justify-content: center;
+}

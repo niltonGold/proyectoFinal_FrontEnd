@@ -14,16 +14,29 @@ import MesasBarra from './components/pagina-mesas(componetes)/mesas--barra';
 import PaginaMesas from './pages/pagina-mesas';
 import { PaginaCobro } from './pages/pagina-cobro';
 
+
+import ThemeProvider from '../src/theming/theme-provider';
+import SwichtButton from '../src/components/swich';
+
+import {useTranslation} from "react-i18next";
+import PrivateRoute from './pages/privateRoutes';
+
 function App() {
 
-  return (
-    
-    <Router>
+  const [t, i18n] = useTranslation('common');
 
+  return (
+    <ThemeProvider > 
+    <Router>
+          <SwichtButton></SwichtButton>
+          <div>
+            <button onClick={() => i18n.changeLanguage('en')}>en</button>
+            <button onClick={() => i18n.changeLanguage('es')}>es</button>
+          </div>
           <Switch>
 
 
-            <Route path="/pagina_mesas">
+            <PrivateRoute path="/pagina_mesas">
 
                 <PaginaMesas></PaginaMesas>
               
@@ -40,16 +53,17 @@ function App() {
                     <MesasBarra></MesasBarra>
                 </Route>
 
-            </Route>
+            </PrivateRoute>
 
-            <Route path="/pagina_comanda/:id">     
+
+            <PrivateRoute path="/pagina_comanda/:id">     
                     <PaginaComanda></PaginaComanda>
-            </Route>
+            </PrivateRoute>
 
 
-            <Route path="/pagina_cobro/:cuentaTotal">     
+            <PrivateRoute path="/pagina_cobro/:cuentaTotal">     
                     <PaginaCobro></PaginaCobro>
-            </Route>
+            </PrivateRoute>
 
             <Route path="/">
               <Login></Login>  
@@ -59,7 +73,7 @@ function App() {
         
       </Router>
       
-
+      </ThemeProvider>   
 
   );
 }
