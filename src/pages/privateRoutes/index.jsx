@@ -6,6 +6,7 @@ import useAuth from '../../custom-hooks/useAuth';
 
 function PrivateRoute({ children,  ...rest }) {
     let auth = useAuth();
+    // let auth = true;
 
     return (
         <Route

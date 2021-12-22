@@ -3,8 +3,11 @@ import List from '@mui/material/List';
 import './style.css';    
 import MostrarLosPedido from '../mostrarUnPedido';
 import { Link } from "react-router-dom";
+import {useTranslation} from "react-i18next";
 
 export default function ListaPlatosElegidos(props){
+
+    const [t, i18n] = useTranslation('common');
 
     const [ listaComanda, setListaComanda ] = React.useState([]);
     const [ hasChange , setHasChange ] = React.useState(false);
@@ -16,7 +19,12 @@ export default function ListaPlatosElegidos(props){
     //     console.log(listaComanda);
     // }
 
-    function BorrarLista(id){
+    function BorrarLista(id, precio){
+        console.log('borrarlista1 '+precio);
+        console.log('borraslista2 '+precioTotal);
+        let precioReducido = precioTotal - precio;
+        setPrecioTotal(precioReducido);
+        console.log('nuevo precio: '+precioTotal)
         // let index = 0;
         // index = listaComanda.findIndex( (e) => e.id === id )
         // console.log(listaComanda);
@@ -29,7 +37,13 @@ export default function ListaPlatosElegidos(props){
 
 
 
-
+   const handleCobrar = () => {
+    console.log('platos elegidos');
+    let list = JSON.stringify(props.listaItems);
+    console.log(list);
+       
+    sessionStorage.setItem('listacomanda', list);
+   }
 
 
 
@@ -53,13 +67,11 @@ export default function ListaPlatosElegidos(props){
         
         <div className='list_container_total_cobrar'>
 
-                <List sx={{ marginTop: 3,width: '60%', maxWidth: 360, bgcolor: 'background.paper', position: 'relative', overflow: 'auto', maxHeight: 200, '& ul': { padding: 0 },}} subheader={<li />} >
-                {/* <List sx={{ marginTop: 3,width: '300px', maxWidth: 360, bgcolor: 'background.paper', position: 'relative', overflow: 'auto', maxHeight: 200, '& ul': { padding: 0 },}} subheader={<li />} > */}
-
-
+                <List sx={{ marginTop: 3,width: '90%', maxWidth: 380, bgcolor: 'background.paper', position: 'relative', overflow: 'auto', maxHeight: 200, '& ul': { padding: 0 },}} subheader={<li />} >
+    
                        <div className='titulos'>
-                           <div>productos</div>
-                           <div>importe</div>
+                           <div>{t('productos.productos')}</div>
+                           <div>{t('importe.importe')}</div>
                        </div>
 
                        <div>
@@ -78,8 +90,8 @@ export default function ListaPlatosElegidos(props){
                 </div>
 
                 <Link to={`/pagina_cobro/${precioTotal}`}>
-                        <button >
-                            COBRAR €
+                        <button onClick={handleCobrar}>
+                            {t('cobrar.cobrar')} €
                         </button>
                 </Link>
     </div>

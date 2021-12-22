@@ -1,21 +1,21 @@
 
-/* .header_container{
-    background-color: antiquewhite;
-    width: 100vh;
-    height: 20%;
-}
-
-.header_principal{
+.mesas_links{
     display: flex;
-    flex-direction: row;
-    gap: 2rem;
-} */
-
-
-.principal__header{
-    /* display:none; */
+    justify-content: center;
 }
 
-.principal__header-hidden{
-    display:none;
+.mesas_botones{
+    border: 2px solid black;
+}
+
+.pagina_mesa--btn{
+    width: 100px;
+    padding: 25px;
+    /* margin: 25px; */
+}
+
+.pagina_mesas_btnGroup{
+    width: 120px;
+    display: grid;
+    place-items: center;
 }

@@ -1,21 +1,35 @@
 import { createTheme } from '@mui/material/styles';
 import { red } from '@mui/material/colors';
+import { amber } from '@mui/material/colors';
+import { blue } from '@mui/material/colors';
+import { indigo } from '@mui/material/colors';
+import { BlueGrey } from '@mui/material/colors';
+import { typography } from '@mui/system';
+
 
 
  export const myTheme = createTheme({
         palette:{ 
 
                     primary:{
-                        main: '#000000',
-                        dark:'#e91e63' 
+                        main: amber[500],
+                        dark:'#c79100' 
                     },
 
                     secondary:{
-                        main: red[100],
-                        dark:'#000000'  
+                        main: blue[700],
+                        dark:'#0069c0'  
+                    },
+                    ternary:{
+                        main: blue[100],
+                        dark:'#8aacc8'  
                     },
 
-        }  
+                    
+
+        }
+
+
 });
 
 
@@ -24,11 +38,18 @@ export const myDarkTheme = createTheme({
 
 
                 primary:{
-                    main: '#4B77D6'//azul
+                    main: indigo[500],
+                    dark: '#002984',
                   },
-                  secondary:{
+
+                secondary:{
                     main: red[500],
                     dark:'#e91e63'  
+                },
+
+                ternary:{
+                    main: blue[700],
+                    dark:'#004ba0'  
                 },
 
         }

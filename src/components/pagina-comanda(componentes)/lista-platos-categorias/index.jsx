@@ -5,14 +5,17 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Box from '@mui/material/Box';
+import {useTranslation} from "react-i18next";
 
 import './style.css';
 
 
 
-
+const platos = JSON.parse(sessionStorage.getItem('platos')); 
 
 export default function ListaPlatosCategorias(props){
+
+    const [t, i18n] = useTranslation('common');
 
     const categorias = [
         <Button onClick={ () => {
@@ -28,8 +31,8 @@ export default function ListaPlatosCategorias(props){
                             if(!categoriaPostres){
                                 setCategoriaProstres(!categoriaPostres)
                             }        
-        } } color="secondary" key="one">
-            Bebidas
+        } } >
+            <div> {t('lista_platos_categorias.bebidas')} </div>
         </Button>,
 
 
@@ -48,7 +51,7 @@ export default function ListaPlatosCategorias(props){
                             }
             
          }} key="two">
-            Entrantes
+            <div>{t('lista_platos_categorias.entrantes')}</div>
         </Button>,
 
 
@@ -67,7 +70,7 @@ export default function ListaPlatosCategorias(props){
                             }
 
         }} key="three">
-            Segundos
+            <div>{t('lista_platos_categorias.segundos')} </div>
         </Button>,
 
 
@@ -86,11 +89,12 @@ export default function ListaPlatosCategorias(props){
                             }
 
         }} key="fourt">
-            Postres
+            <div>{t('lista_platos_categorias.postres')} </div>
         </Button>,
 
 
       ];
+
 
 
     const [ categoriaBebidas, setCategoriaBebidas ]  = React.useState(true);
@@ -99,15 +103,37 @@ export default function ListaPlatosCategorias(props){
     const [ categoriaPostres, setCategoriaProstres ]  = React.useState(true);
 
 
-    const [ notaComanda, setNotaComanda ]  = React.useState([]);
+    const [ bebidas, setBebidas ]  = React.useState([]);
+    
+    const [ entrantes, setEntrantes ] = React.useState([]);
 
+    const [ segundos, setSegundos ]  = React.useState([]);
+    
+    const [ postres, setPostres ] = React.useState([]);
+  
 
+    function addListComanda(producto){
+        // notaComanda.push(h);
+        // setNotaComanda([...notaComanda])
+        // props.listaItems(notaComanda);
 
-    function addListComanda(h){
-        notaComanda.push(h);
-        setNotaComanda([...notaComanda])
-        props.listaItems(notaComanda);
+        props.listaItems(producto);
+
+        console.log(producto);
     }  
+
+
+    //     const addListComanda = (e) => {
+    //     // console.log(typeof e.target.id);
+    //     let idFromButton = e.target.id;
+    //     // console.log(listaPlatos[0].id);
+    //     let producto = listaPlatos.filter( e => e.id === idFromButton);
+    //     console.log(producto[0].nombre);
+    //     notaComanda.push(producto[0] );
+    //     setNotaComanda([...notaComanda])
+    //     props.listaItems(notaComanda);
+        
+    // }
    
     const bebida = 
         { 'bebidas' :[
@@ -127,107 +153,202 @@ export default function ListaPlatosCategorias(props){
 
 
 
+
+    const Bebidas = () => {
+            const optionsBebidas = {
+                method: 'GET',
+                headers:{
+                    'Content-type': 'application/json'
+                }
+            }
+
+            fetch('http://localhost:3001/bebidas', optionsBebidas)
+            .then(r => r.json() )
+            .then(d => {
+                let b = JSON.stringify(d);
+                b = JSON.parse(b);
+                setBebidas(b);
+            });
+    }
+
+
+
+
+    const Entrantes = () => {
+            const optionsEntrantes = {
+                method: 'GET',
+                headers:{
+                    'Content-type': 'application/json'
+                }
+            }
+
+            fetch('http://localhost:3001/entrantes', optionsEntrantes)
+            .then(r => r.json() )
+            .then(d => {
+                let e = JSON.stringify(d);
+                e = JSON.parse(e);
+                setEntrantes(e);
+            });
+    }
+
+
+
+
+    const Segundos = () => {
+            const optionsSegundos = {
+                method: 'GET',
+                headers:{
+                    'Content-type': 'application/json'
+                }
+            }
+
+            fetch('http://localhost:3001/segundos', optionsSegundos)
+            .then(r => r.json() )
+            .then(d => {
+                let s = JSON.stringify(d);
+                s = JSON.parse(s);
+                setSegundos(s);
+            });
+    }
+
+
+
+
+    const Postres = () => {
+            const optionsPotres = {
+                method: 'GET',
+                headers:{
+                    'Content-type': 'application/json'
+                }
+            }
+
+            fetch('http://localhost:3001/postres', optionsPotres)
+            .then(r => r.json() )
+            .then(d => {
+                let p = JSON.stringify(d)
+                p = JSON.parse(p);
+                setPostres(p)
+            });
+    }
+
+
+    React.useEffect( ()=>{
+        Bebidas();
+        Entrantes();
+        Segundos();
+        Postres();
+        console.log('se ha actualizado en lista platos categorias');
+    },[] )
+
+
+
+
+
+   
     return(
         
-        <div className='categoria_elegida'>                    
-                <Box sx={{ width:'25vw' ,'& button': { m: 1 } }}>
-                    {/* <div>{console.log(bebida.bebidas[0])}</div> */}
+        <div className='categoria_elegida'>
+
+                
+                <Box className='productos_a_elegir' sx={{ '& button': { m: 1 }, width: '60%', height: '100%' }}>
+                    {/* <div>{bebidas.map((e)=>e.nombre)}</div>
+                    <div>{entrantes.map((e)=>e.nombre)}</div>
+                    <div>{segundos.map((e)=>e.nombre)}</div>
+                    <div>{postres.map((e)=>e.nombre)}</div> */}
                     
-                    <div className={categoriaBebidas ? 'categoria--hidden' : ''}>
+                    <div className={categoriaBebidas ? 'categoria--hidden' : 'categoria_elegida'}>
                             <div >
-                                    <Button onClick={ () => addListComanda( bebida.bebidas[0] ) } variant="outlined" size="medium">
-                                        bebida1
+                                <Button  sx={{ borderRadius: 8, fontSize: 10 }} id='cc'  onClick={ () => addListComanda( bebidas[0] ) } variant="contained" size="medium">
+                                   {t('lista_platos_categorias.cocacola')}
 
-                                    </Button>
+                                </Button>
 
-                                    <Button onClick={ () => addListComanda( bebida.bebidas[1] ) } variant="outlined" size="medium">
-                                        bebida2
-                                    </Button>
+                                <Button sx={{ borderRadius: 8, fontSize: 10 }} id=''cl onClick={ () => addListComanda( bebidas[1] ) } variant="contained" size="medium">
+                                    {t('lista_platos_categorias.cocalight').toLocaleLowerCase()} 
+                                </Button>
                             </div>
 
                             <div>
-                                <Button variant="outlined" size="medium">
-                                    bebida3
+                                <Button sx={{ borderRadius: 8, fontSize: 10}} id='fn' onClick={ () => addListComanda( bebidas[2] ) } variant="contained" size="medium">
+                                    {t('lista_platos_categorias.fantanaranja')} 
                                 </Button>
-                                <Button variant="outlined" size="medium">
-                                    bebida4
+
+                                <Button sx={{ borderRadius: 8, fontSize: 10 }} id='nt' onClick={ () => addListComanda( bebidas[3] ) } variant="contained" size="medium">
+                                    {t('lista_platos_categorias.nesti')} 
                                 </Button>
 
                             </div>
                     </div>
 
-                    <div className={categoriaEntrantes ? 'categoria--hidden' : ''}>
-                        <div >
-                            <Button variant="outlined" size="medium">
-                                entran1
-                            </Button>
+                    <div className={categoriaEntrantes ? 'categoria--hidden' : 'categoria_elegida'}>
+                            <div >
+                                <Button sx={{ borderRadius: 8, fontSize: 10 }} id='pl' onClick={ () => addListComanda( entrantes[0] ) } variant="contained" size="medium">
+                                    {t('lista_platos_categorias.palitos')} 
+                                </Button>
 
-                            <Button variant="outlined" size="medium">
-                                entran2
-                            </Button>
+                                <Button sx={{ borderRadius: 8, fontSize: 10 }} id='ng' onClick={ () => addListComanda( entrantes[1] ) } variant="contained" size="medium">
+                                    {t('lista_platos_categorias.pollo')} 
+                                </Button>
 
-                        </div>
+                            </div>
 
-                        <div>
-                            <Button variant="outlined" size="medium">
-                                entran3
-                            </Button>
-                            <Button variant="outlined" size="medium">
-                                entran4
-                            </Button>
+                            <div>
+                                <Button sx={{ borderRadius: 8, fontSize: 10 }} id='br' onClick={ () => addListComanda( entrantes[2] ) } variant="contained" size="medium">
+                                    {t('lista_platos_categorias.berengena')} 
+                                </Button>
+                                <Button sx={{ borderRadius: 8, fontSize: 10 }} id='cb' onClick={ () => addListComanda( entrantes[3] ) } variant="contained" size="medium">
+                                    {t('lista_platos_categorias.cebolla')} 
+                                </Button>
 
-                        </div>
-                        
+                            </div>
                     </div>
 
 
-                    <div className={categoriaSegundos ? 'categoria--hidden' : ''}>
-                        <div >
-                            <Button variant="outlined" size="medium">
-                                segund1
-                            </Button>
+                    <div className={categoriaSegundos ? 'categoria--hidden' : 'categoria_elegida'}>
+                            <div >
+                                <Button sx={{ borderRadius: 8, fontSize: 10 }} id='hb' onClick={ () => addListComanda( segundos[0] ) } variant="contained" size="medium">
+                                    {t('lista_platos_categorias.hamburguesa')}
+                                </Button>
 
-                            <Button variant="outlined" size="medium">
-                                segund2
-                            </Button>
+                                <Button sx={{ borderRadius: 8, fontSize: 10 }} id='ct' onClick={ () => addListComanda( segundos[1] ) } variant="contained" size="medium">
+                                    {t('lista_platos_categorias.costillas')}
+                                </Button>
 
-                        </div>
+                            </div>
 
-                        <div>
-                            <Button variant="outlined" size="medium">
-                                segund3
-                            </Button>
-                            <Button variant="outlined" size="medium">
-                                segund4
-                            </Button>
+                            <div>
+                                <Button sx={{ borderRadius: 8, fontSize: 10 }} id='es' onClick={ () => addListComanda( segundos[2] ) } variant="contained" size="medium">
+                                    {t('lista_platos_categorias.ensalada')}
+                                </Button>
+                                <Button sx={{ borderRadius: 8, fontSize: 10}} id='sd' onClick={ () => addListComanda( segundos[3] ) } variant="contained" size="medium">
+                                    {t('lista_platos_categorias.sandwish')}
+                                </Button>
 
-                        </div>
-                        
+                            </div>
                     </div>
 
 
-                    <div className={categoriaPostres ? 'categoria--hidden' : ''}>
-                        <div >
-                            <Button variant="outlined" size="medium">
-                                postre1
-                            </Button>
+                    <div className={categoriaPostres ? 'categoria--hidden' : 'categoria_elegida'}>
+                            <div >
+                                <Button sx={{ borderRadius: 8, fontSize: 10}} id='ck' onClick={ () => addListComanda( postres[0] ) } variant="contained" size="medium">
+                                    {t('lista_platos_categorias.galleta')}
+                                </Button>
 
-                            <Button variant="outlined" size="medium">
-                                postre2
-                            </Button>
+                                <Button sx={{ borderRadius: 8, fontSize: 10 }} id='hl' onClick={ () => addListComanda( postres[1] ) } variant="contained" size="medium">
+                                    {t('lista_platos_categorias.helado')}
+                                </Button>
 
-                        </div>
+                            </div>
 
-                        <div>
-                            <Button variant="outlined" size="medium">
-                                postre3
-                            </Button>
-                            <Button variant="outlined" size="medium">
-                                postre4
-                            </Button>
+                            <div>
+                                <Button sx={{ borderRadius: 8, fontSize: 10 }} id='tr' onClick={ () => addListComanda( postres[2] ) } variant="contained" size="medium">
+                                    {t('lista_platos_categorias.tarta')}
+                                </Button>
+                                <Button sx={{ borderRadius: 8, fontSize: 10 }} id='qs' onClick={ () => addListComanda( postres[3] ) } variant="contained" size="medium">
+                                    {t('lista_platos_categorias.queso')}
+                                </Button>
 
-                        </div>
-                        
+                            </div> 
                     </div>
                 </Box>
 
@@ -235,7 +356,7 @@ export default function ListaPlatosCategorias(props){
 
 
                           
-                <Box className='botones_lista_categorias' sx={{ display: 'flex', '& > *': { m: 1, }, }} >
+                <Box sx={{ display: 'flex', '& > *': { m: 1, }, }} >
 
                         <ButtonGroup className='button_group' orientation="vertical" aria-label="vertical contained button group" variant="contained" >
                                 {categorias}

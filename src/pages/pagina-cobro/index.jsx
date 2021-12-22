@@ -83,20 +83,18 @@ export  function PaginaCobro(){
     return(
         <div>
             <header>
-                <div>{cuenta}</div>
-              
-                
                 <PaginaCobrosHeader></PaginaCobrosHeader>
             </header>
 
 
             <div className="contenedor_pago_forma">
+                <div className="div_pago">
+                    <Pago reiniciar={Reinicio} pagoTarjeta={dineroPagadoTarjeta} pagoEfectivo={dineroPagadoEfectivo} precioPendiente={cuenta} precioTotal={cuentaTotal}></Pago>
+                </div>
 
-                <Pago reiniciar={Reinicio} pagoTarjeta={dineroPagadoTarjeta} pagoEfectivo={dineroPagadoEfectivo} precioPendiente={cuenta} precioTotal={cuentaTotal}></Pago>
-
-                {/* <FormasDePago capturarCuenta={CalcularCuenta} pagoEnEfectivo={ActualizarDineroPagadoEfectivo}></FormasDePago> */}
-                <FormasDePago pagoTarjeta={ActualizarDineroPagadoTarjeta} pagoEnEfectivo={ActualizarDineroPagadoEfectivo}></FormasDePago>
-
+                <div className="div_formaspago">
+                    <FormasDePago pagoTarjeta={ActualizarDineroPagadoTarjeta} pagoEnEfectivo={ActualizarDineroPagadoEfectivo}></FormasDePago>
+                </div>
             </div>    
             
         </div>

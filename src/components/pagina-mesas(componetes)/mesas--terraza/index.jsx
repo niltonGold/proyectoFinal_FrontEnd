@@ -9,17 +9,20 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 
 import { Link } from "react-router-dom";
+import {useTranslation} from "react-i18next";
 
 
 
 export default function MesasTerraza(){
 
+    const [t, i18n] = useTranslation('common');
+
     return(
-        <Box sx={{bgcolor: 'secondary.main', display: 'flex', flexWrap: 'wrap',  '& > :not(style)': { p: 2,  m: 2,  width: '100%', },  }} >
+        <Box sx={{bgcolor: 'secondary.main', display: 'flex', flexWrap: 'wrap',  '& > :not(style)': { p: 2,  m: 2,  width: '100%', }, mt: 2  }} >
 
                 <Paper sx={{justifyContent: 'space-around', display: 'flex',  flexWrap: 'wrap',  gap: '1rem'  }} elevation={3}>
                     
-                    <div>Rango 1</div>
+                    <div>{t('rango.rango')} 1</div>
                     <Link to={`/pagina_comanda/T1`}>
                         <Stack id="T1" spacing={2}>
                                 <Button variant="contained">
@@ -80,7 +83,7 @@ export default function MesasTerraza(){
 
                 <Paper sx={{justifyContent: 'space-around', display: 'flex',  flexWrap: 'wrap',  gap: '1rem'  }} elevation={3}> 
 
-                    <div>Rango 2</div> 
+                    <div>{t('rango.rango')} 2</div> 
 
                     <Link to={`/pagina_comanda/T6`}>
                         <Stack id="T6" spacing={2}>

@@ -11,46 +11,19 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-
-
-
+import {useTranslation} from "react-i18next";
 import Stack from '@mui/material/Stack';
-
-
 import React from "react";
 import { Link } from "react-router-dom";
+import './style.css';
 
-
-
-
-
-const pages = ['Sala', 'Terraza', 'Barra'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
-
-
-
-
-
-
 
 export default function PaginaMesas(){
 
-
-
-    
-
-
-
-
-
-
+    const [t, i18n] = useTranslation('common');
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
-
-    // const [paginaSala, setPaginaSala] = React.useState(null);
-    // const [paginaTerraza, setPaginaTerraza] = React.useState(null);
-    // const [paginaBar, setPaginaBar] = React.useState(null);
-    
   
     const handleOpenNavMenu = (event) => {
       setAnchorElNav(event.currentTarget);
@@ -68,97 +41,65 @@ export default function PaginaMesas(){
       setAnchorElUser(null);
     };
   
-
-
- 
-  
-
-
-
     return(
         <header >
-
-                        
-                
 
                 <AppBar position="static">
                     <Container maxWidth="xm">
                             <Toolbar disableGutters>
 
-                                <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-                                    <IconButton
-                                        size="large"
-                                        aria-label="account of current user"
-                                        aria-controls="menu-appbar"
-                                        aria-haspopup="true"
-                                        onClick={handleOpenNavMenu}
-                                        color="inherit">
+                                <Box sx={{ flexGrow: 1, display: { xs: 'flex', sm: 'none' } }}>
+                                    
+                                    <IconButton  size="large"  aria-label="account of current user"  aria-controls="menu-appbar"  aria-haspopup="true"  onClick={handleOpenNavMenu}  color="inherit">
                                             <MenuIcon />
                                     </IconButton>
-                                    <Menu
-                                        id="menu-appbar"
-                                        anchorEl={anchorElNav}
-                                        anchorOrigin={{vertical: 'bottom', horizontal: 'left',}}
-                                        keepMounted
-                                        transformOrigin={{ vertical: 'top', horizontal: 'left',}}
-                                        open={Boolean(anchorElNav)}
-                                        onClose={handleCloseNavMenu}
-                                        sx={{ display: { xm: 'block', md: 'none' }, }} >
+                                    
+                                    <Menu id="menu-appbar"  anchorEl={anchorElNav} anchorOrigin={{vertical: 'bottom', horizontal: 'left',}}  keepMounted  transformOrigin={{ vertical: 'top', horizontal: 'left',}}  open={Boolean(anchorElNav)}   onClose={handleCloseNavMenu}  sx={{ display: { xm: 'block', md: 'none' }, }} >
+                                    {/*contenido del menu pequeño */}
+                                            <Stack className='pagina_mesas_btnGroup' spacing={1} direction="column">
+                                            
+                                                <Link to="/pagina_mesas/mesas_sala">
+                                                    <Button className='pagina_mesa--btn' onClick={handleCloseNavMenu} variant="contained">
+                                                        {t('pagina_mesas.sala')} 
+                                                    </Button>
+                                                </Link>
+                                                <Link to="/pagina_mesas/mesas_terraza">
+                                                    <Button className='pagina_mesa--btn' onClick={handleCloseNavMenu}  variant="contained">
+                                                        {t('pagina_mesas.terraza')} 
+                                                    </Button>
+                                                </Link>
 
-                                                <Stack spacing={3} direction="column">
-                                               
-                                                    <Link to="/pagina_mesas/mesas_sala">
-                                                        <Button onClick={handleCloseNavMenu} variant="contained">
-                                                            {pages[0]} 
-                                                        </Button>
-                                                    </Link>
-                                                {/* </Stack>
+                                                <Link to="/pagina_mesas/mesas_barra">
+                                                    <Button className='pagina_mesa--btn' onClick={handleCloseNavMenu}  variant="contained">
+                                                        {t('pagina_mesas.barra')} 
+                                                    </Button>
+                                                </Link>
 
-                                                <Stack spacing={2} direction="row"> */}
-                                                    <Link to="/pagina_mesas/mesas_terraza">
-                                                        <Button onClick={handleCloseNavMenu}  variant="contained">
-                                                            {pages[1]}
-                                                        </Button>
-                                                    </Link>
-                                                {/* </Stack>
+                                            </Stack>
 
-                                                <Stack spacing={2} direction="row"> */}
-                                                    <Link to="/pagina_mesas/mesas_barra">
-                                                        <Button onClick={handleCloseNavMenu}  variant="contained">
-                                                                {pages[2]}
-                                                        </Button>
-                                                    </Link>
-                                                </Stack>
-
-
-
-                                        
                                     </Menu>
+
                                 </Box>
 
-                                {/* <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}> */}
 
-                                <Box sx={{ flexGrow: 1, display: { xs: 'none', sm: 'flex', md: 'flex'  } }}>
+                                <Box  className='mesas_links' sx={{ flexGrow: 1, display: { xs: 'none', sm: 'flex' } }}>
 
                                         <Stack spacing={3} direction="row">
                                             <Link to="/pagina_mesas/mesas_sala">
-                                                <Button variant="contained">Sala</Button>
+                                                <Button variant="contained">{t('pagina_mesas.sala')}</Button>
                                             </Link>
-                                        {/* </Stack> */}
 
-                                        {/* <Stack spacing={2} direction="row"> */}
                                             <Link to="/pagina_mesas/mesas_terraza">
-                                                <Button variant="contained">Terraza</Button>
+                                                <Button variant="contained">{t('pagina_mesas.terraza')} </Button>
                                             </Link>
-                                        {/* </Stack> */}
- 
-                                        {/* <Stack spacing={2} direction="row"> */}
+
                                             <Link to="/pagina_mesas/mesas_barra">
-                                                <Button variant="contained">Barra</Button>
+                                                <Button variant="contained">{t('pagina_mesas.barra')} </Button>
                                             </Link>
                                         </Stack>
 
                                 </Box>
+
 
                                 <Box sx={{ flexGrow: 0 }}>
                                     <Tooltip title="Open settings">
@@ -185,19 +126,6 @@ export default function PaginaMesas(){
                             </Toolbar>
                     </Container>
                 </AppBar> 
-
-
-
-
- 
-
-
-
-
-
-
-
-
 
         </header>
     )

@@ -9,13 +9,9 @@ import ListaPlatosCategorias from '../../components/pagina-comanda(componentes)/
 
 
 
+
 export default function PaginaComanda(){
-
-   
     // const [ notaComanda, setNotaComanda ]  = React.useState([]);
-
-
-
 
     // function addListComanda(h){
 
@@ -26,24 +22,38 @@ export default function PaginaComanda(){
     // }  
    
     const [ listaComanda , setListaComanda ] = React.useState([]);
+    // const [ hasChange , setHasChange ] = React.useState(false);
 
 
     function recibirLista(lista){
-        setListaComanda(lista);
-        console.log('page_coman'+listaComanda[0]?.nombre)
+        listaComanda.push(lista);
+        setListaComanda([...listaComanda]);
+        console.log('recibir lista')
+        console.log(listaComanda.length)
     }
+
+
 
     function borraItem(id){
         console.log('elemento borrado: '+id)
-        let newComanda = listaComanda;
-        newComanda.splice(id,1);
-        setListaComanda(newComanda);
-        console.log('comanda previa');
-        listaComanda.forEach((e)=> console.log(e.nombre));
+        console.log(listaComanda.forEach((e)=> console.log(e.nombre)));
+        
+        listaComanda.splice(id,1);
 
-        console.log('comanda nueva');
-        newComanda.forEach((e)=> console.log(e.nombre));
+        console.log('comanda listacomanda');
+        listaComanda.forEach((e)=> console.log(e.nombre));
+        // console.log('comanda nueva');
+        setListaComanda([...listaComanda])
+        console.log('comanda listacomanda 2');
+        listaComanda.forEach((e)=> console.log(e.nombre));
+        // setHasChange(!hasChange);
     }
+
+    // React.useEffect( ()=>{
+    //     // ActualizarArray(props.listaItems);
+    //     console.log('se ha actualizado 3');
+    // },[hasChange] )
+
 
 
     return(
@@ -53,19 +63,11 @@ export default function PaginaComanda(){
             <div className='pagina_comanda_body'>
                     
                         <div className="lista_platos_elegidos">
-                        {/* <div>{console.log(ho[0]?.bebida.precio)}</div> */}
-                        <ListaPlatosElegidos deleteItem={borraItem} listaItems={listaComanda}></ListaPlatosElegidos>
-                            
-                        
-
+                            <ListaPlatosElegidos deleteItem={borraItem} listaItems={listaComanda}></ListaPlatosElegidos>
                         </div>
 
-
-
-                        <div className="lista_platos_categorias">
-                                
+                        <div className="lista_platos_categorias">      
                            <ListaPlatosCategorias listaItems={recibirLista}></ListaPlatosCategorias>
-
                         </div>
 
             </div>

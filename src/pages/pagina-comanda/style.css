@@ -12,22 +12,22 @@
                 display: flex;
                 justify-content: center;
                 background-color: blueviolet;
-                width: 50%;
+                width: 70vh;
             }
 
 
             .lista_platos_categorias{
                 background-color: rgb(104, 226, 43);
-                
                 display: flex;
                 justify-content: right;
+                width: 70vh;
 
             }    
 
                     .categoria_elegida{
                         display: flex;
                         flex-direction: row;
-                        background-color: darkkhaki;
+                        /* background-color: rgb(117, 117, 110); */
                     }
 
                     .botones_lista_categorias{
@@ -35,9 +35,7 @@
                          
                     }
 
-                    .list_container_total_cobrar{
-                        width: 100%;
-                    }
+
 
 
 

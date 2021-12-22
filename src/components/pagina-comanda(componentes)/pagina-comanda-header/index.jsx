@@ -33,11 +33,6 @@ export default function PaginaComandaHeader(){
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
 
-    // const [paginaSala, setPaginaSala] = React.useState(null);
-    // const [paginaTerraza, setPaginaTerraza] = React.useState(null);
-    // const [paginaBar, setPaginaBar] = React.useState(null);
-    
-  
     const handleOpenNavMenu = (event) => {
       setAnchorElNav(event.currentTarget);
     };
@@ -46,7 +41,6 @@ export default function PaginaComandaHeader(){
     };
   
     const handleCloseNavMenu = () => {  
-        
       setAnchorElNav(null);
     };
   
@@ -85,7 +79,6 @@ export default function PaginaComandaHeader(){
             
                 <AppBar position="static">
                    
-                    
                     <Container maxWidth="xm">
                             <Toolbar disableGutters>
 
@@ -99,15 +92,7 @@ export default function PaginaComandaHeader(){
                                         color="inherit">
                                             <MenuIcon />
                                     </IconButton>
-                                    <Menu
-                                        id="menu-appbar"
-                                        anchorEl={anchorElNav}
-                                        anchorOrigin={{vertical: 'bottom', horizontal: 'left',}}
-                                        keepMounted
-                                        transformOrigin={{ vertical: 'top', horizontal: 'left',}}
-                                        open={Boolean(anchorElNav)}
-                                        onClose={handleCloseNavMenu}
-                                        sx={{ display: { xm: 'block', md: 'none' }, }} >
+                                    <Menu   id="menu-appbar"  anchorEl={anchorElNav}   anchorOrigin={{vertical: 'bottom', horizontal: 'left',}}  keepMounted  transformOrigin={{ vertical: 'top', horizontal: 'left',}}  open={Boolean(anchorElNav)}  onClose={handleCloseNavMenu}  sx={{ display: { xm: 'block', md: 'none' }, }} >
 
                                                 <Stack spacing={3} direction="column">
                                                     
@@ -117,27 +102,21 @@ export default function PaginaComandaHeader(){
                                                         </Button>
                                                     </Link>
                                                     
-                                                {/* </Stack>
-
-                                                <Stack spacing={2} direction="row"> */}
+ 
                                                     <Link to="/mesas_Terraza">
                                                         <Button onClick={handleCloseNavMenu}  variant="contained">
                                                             {pages[1]}
                                                         </Button>
                                                     </Link>
-                                                {/* </Stack>
 
-                                                <Stack spacing={2} direction="row"> */}
                                                     <Link to="/mesas_barra">
                                                         <Button onClick={handleCloseNavMenu}  variant="contained">
-                                                                {pages[2]}
+                                                            {pages[2]}
                                                         </Button>
                                                     </Link>
-                                                </Stack>
 
+                                                </Stack>  
 
-
-                                        
                                     </Menu>
                                 </Box>
 

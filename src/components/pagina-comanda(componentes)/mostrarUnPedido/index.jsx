@@ -6,12 +6,12 @@ export default function MostrarLosPedido(props){
 
 
     const handleClick = () => {
-        props.borrarItem(props.id)
+        props.borrarItem(props.id, props.pedido.precio)
     }
 
  
 useEffect( () => {
-    props.sumarPrecio(parseInt(props.pedido.precio));
+    props.sumarPrecio(parseFloat(props.pedido.precio));
 },[]);
 
     return(
@@ -19,7 +19,7 @@ useEffect( () => {
          
             <ul className="ul">
                 <li>{props.pedido.nombre}</li>
-                <li>{props.pedido.precio}</li>
+                <li>{props.pedido.precio} €</li>
                 <li> <button onClick={handleClick} id={props.id}>eliminar</button> </li>
                 
             </ul> 

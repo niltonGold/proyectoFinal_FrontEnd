@@ -19,11 +19,15 @@ import diesCenti from './dineroIconos/0_10.png'
 import cincoCenti from './dineroIconos/0_05.png'
 import dosCenti from './dineroIconos/0_02.png'
 import unCenti from './dineroIconos/0_01.png'
+import AdjustIcon from '@mui/icons-material/Adjust';
+import {useTranslation} from "react-i18next";
 
 import './style.css';
 
 
 export function FormasDePago(props){
+
+    const [t, i18n] = useTranslation('common');
 
     const [ valor, setValor ] = React.useState('');
 
@@ -102,21 +106,21 @@ export function FormasDePago(props){
                 </div>
 
                 <div>
-                    <button onClick={handleClickEfectivo} ><img  id='2' width="40" height="40" src={dos}></img></button>
-                    <button onClick={handleClickEfectivo} ><img  id='1' width="40" height="40" src={uno}></img></button>
-                    <button onClick={handleClickEfectivo} ><img  id='0.5' width="40" height="40" src={cincuentaCenti}></img></button>
-                    <button onClick={handleClickEfectivo} ><img  id='0.2' width="40" height="40" src={veinteCenti}></img></button>
-                    <button onClick={handleClickEfectivo} ><img  id='0.1' width="40" height="40" src={diesCenti}></img></button>
-                    <button onClick={handleClickEfectivo} ><img  id='0.05' width="40" height="40" src={cincoCenti}></img></button>
-                    <button onClick={handleClickEfectivo} ><img  id='0.02' width="40" height="40" src={dosCenti}></img></button>
-                    <button onClick={handleClickEfectivo} ><img  id='0.01' width="40" height="40" src={unCenti}></img></button>
+                    <button onClick={handleClickEfectivo} ><img  id='2' width="30" height="30" src={dos}></img></button>
+                    <button onClick={handleClickEfectivo} ><img  id='1' width="30" height="30" src={uno}></img></button>
+                    <button onClick={handleClickEfectivo} ><img  id='0.5' width="30" height="30" src={cincuentaCenti}></img></button>
+                    <button onClick={handleClickEfectivo} ><img  id='0.2' width="30" height="30" src={veinteCenti}></img></button>
+                    <button onClick={handleClickEfectivo} ><img  id='0.1' width="30" height="30" src={diesCenti}></img></button>
+                    <button onClick={handleClickEfectivo} ><img  id='0.05' width="30" height="30" src={cincoCenti}></img></button>
+                    <button onClick={handleClickEfectivo} ><img  id='0.02' width="30" height="30" src={dosCenti}></img></button>
+                    <button onClick={handleClickEfectivo} ><img  id='0.01' width="30" height="30" src={unCenti}></img></button>
 
                 </div>
             </div>
             
             
             <div className='pago_tarjeta'>
-                <div>
+                <div className='tarjeta_icon'>
                     <button id='enviar' onClick={handleClickTarjeta}>
                         <CreditCardIcon sx={{ fontSize: 100 }}/>
                     </button>    
@@ -126,7 +130,7 @@ export function FormasDePago(props){
 
                     <input type="text" value={valor}></input>
 
-                    <div>
+                    <div className='panel_numerico_btn'>
                         <Button id='1' onClick={handleTarjeta} variant="contained" size="small">
                         1
                         </Button>
@@ -138,7 +142,7 @@ export function FormasDePago(props){
                         </Button>
                     </div>
 
-                    <div>
+                    <div className='panel_numerico_btn'>
                         <Button id='4' onClick={handleTarjeta} variant="contained" size="small">
                         4
                         </Button>
@@ -150,7 +154,7 @@ export function FormasDePago(props){
                         </Button>
                     </div>
 
-                    <div>
+                    <div className='panel_numerico_btn'>
                         <Button id='7' onClick={handleTarjeta} variant="contained" size="small">
                         7
                         </Button>
@@ -162,15 +166,15 @@ export function FormasDePago(props){
                         </Button>
                     </div>
 
-                    <div>
+                    <div className='panel_numerico_btn'>
+                        <Button id='.' onClick={handleTarjeta} variant="contained" size="small">
+                            <AdjustIcon sx={ {fontSize: 17 }}></AdjustIcon>
+                        </Button>
                         <Button id='0' onClick={handleTarjeta} variant="contained" size="small">
                         0
                         </Button>
-                        <Button id='.' onClick={handleTarjeta} variant="contained" size="small">
-                        .
-                        </Button>
-                        <Button id='borrar' onClick={handleTarjeta} variant="contained" size="small">
-                        borrar
+                        <Button sx={ {fontSize: 10 }} id='borrar' onClick={handleTarjeta} variant="contained" size="small">
+                            {t('borrar.borrar')}
                         </Button>
                     </div>
 
