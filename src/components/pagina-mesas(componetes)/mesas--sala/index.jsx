@@ -13,7 +13,7 @@ export default function MesasSala(){
 
     return(
 
-        <Box sx={{bgcolor: 'ternary.main', display: 'flex', flexWrap: 'wrap',  '& > :not(style)': { p: 2,  m: 2,  width: '100%', }, mt: 2 }} >
+        <Box sx={{bgcolor: 'secondary.main', display: 'flex', flexWrap: 'wrap',  '& > :not(style)': { p: 2,  m: 2,  width: '100%', }, mt: 2 }} >
 
             <Paper sx={{justifyContent: 'space-around', display: 'flex',  flexWrap: 'wrap',  gap: '1rem'  }} elevation={4}>
                 

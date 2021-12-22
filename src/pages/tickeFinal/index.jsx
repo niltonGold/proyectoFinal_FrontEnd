@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import './style.css';
+import TicketList from './lista_ticket';
 
 export default function Ticket(){
 
@@ -42,22 +43,38 @@ React.useEffect( ()=>{
     },[] )
 
     return (
-        
-            <Box sx={{ display: 'flex', justifyContent: 'center',  flexWrap: 'wrap', '& > :not(style)': {  m: 1, width: '70%',  height: '90%', },  }}>
+        <React.Fragment>
+        <button onClick={handleExit}>Exit</button>
+            <Box sx={{ display: 'flex', justifyContent: 'center',  flexWrap: 'wrap', '& > :not(style)': {  m: 1, width: '50%',  height: '90%', },  }}>
+                
+                <Paper sx={{ textAlign: 'center', justifyContent: 'center'  }} elevation={6} > 
+                <div className='container'>
+                    <div>TICKET</div>
 
-                <Paper sx={{ textAlign: 'center'  }} elevation={6} > 
-                    <div>ticket</div>
-                    {console.log(precioTotal)}
-                    {console.log(pagoTarjeta)}
-                    {console.log(pagoEfectivo)}
-                    <div>total consumido:{precioTotal}</div>
-                    <div>efectivo:{pagoEfectivo}</div>
-                    <div>tarjeta:{pagoTarjeta}</div>
-                    <div>devolver:{devolverAlCliente}</div>
-                    <div>{listaProductosConsumidos.map((e) => <div>{e.nombre}</div> )}</div>
-                    <button onClick={handleExit}>Exit</button>
+                    <hr/>
+                        {listaProductosConsumidos.map( (e) => <TicketList listaProductos={e}></TicketList> )}
+                    <hr/>
+
+
+                    <div className='una_linea_lista'>
+                        <div className='subtitulo'>Pago Total</div> <div>:</div> <div className='dinero'>{precioTotal} €</div>
+                    </div>    
+                    
+                    <div className='una_linea_lista'> 
+                        <div className='subtitulo'>Efectivo</div> <div>:</div> <div className='dinero'>{pagoEfectivo} €</div>
+                    </div>
+                    
+                    <div className='una_linea_lista'>
+                        <div className='subtitulo'>Tarjeta</div> <div>:</div> <div className='dinero'>{pagoTarjeta} €</div>
+                    </div>
+
+                    <div className='una_linea_lista'>
+                        <div className='subtitulo'>Devolver</div> <div>:</div> <div className='dinero'>{devolverAlCliente} €</div>
+                    </div>
+                   
+                </div>    
                 </Paper>
             </Box>
-
+        </React.Fragment>
     )
 }
